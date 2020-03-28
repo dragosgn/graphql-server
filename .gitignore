@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/git,node,macos
 # Edit at https://www.gitignore.io/?templates=git,node,macos
 
@@ -53,9 +52,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
 pids
