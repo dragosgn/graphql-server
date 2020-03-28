@@ -4,6 +4,10 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import 'dotenv/config';
 import uuidv4 from 'uuid/v4';
 
+import schema from './schema';
+import resolvers from './resolvers';
+import models from './models';
+
 const app = express();
 
 app.use(cors());
