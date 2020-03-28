@@ -24,8 +24,20 @@ const schema = gql`
   type Message {
     id: ID!
     text: String!
+    user: User!
   }
 `;
+
+let messages = {
+  1: {
+    id: '1',
+    text: 'Hello World',
+  },
+  2: {
+    id: '2',
+    text: 'By World',
+  },
+};
 
 let users = {
   1: {
@@ -61,11 +73,19 @@ const resolvers = {
   User: {
     username: user => `${user.firstname} ${user.lastname}`,
   },
+  Message: {
+    user: (parent, args, { me }) => {
+      return me;
+    },
+  },
 };
 
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
+  context: {
+    me: users[1],
+  },
 });
 
 server.applyMiddleware({ app, path: '/graphql' });
