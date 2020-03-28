@@ -51,6 +51,12 @@ const resolvers = {
     me: (parent, args, { me }) => {
       return me;
     },
+    messages: () => {
+      return Object.values(messages);
+    },
+    message: (parent, { id }) => {
+      return messages[id];
+    },
   },
   User: {
     username: user => `${user.firstname} ${user.lastname}`,
