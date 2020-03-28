@@ -26,8 +26,8 @@ export default {
     },
   },
   Message: {
-    user: (message) => {
-      return users[message.userId];
+    user: (message, args, { models }) => {
+      return models.users[message.userId];
     },
   },
   Mutation: {
@@ -46,10 +46,13 @@ export default {
     },
     deleteMessage: (parent, { id }, { models }) => {
       const { [id]: message, ...otherMessages } = models.messages;
+
       if (!message) {
         return false;
       }
+
       models.messages = otherMessages;
+
       return true;
     },
   },
