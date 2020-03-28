@@ -45,10 +45,12 @@ let users = {
   1: {
     id: '1',
     username: 'Dragos',
+    messageIds: [1],
   },
   2: {
     id: '2',
     username: 'Tony',
+    messageIds: [2],
   },
 };
 
