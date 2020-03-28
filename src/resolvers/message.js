@@ -2,32 +2,11 @@ import uuidv4 from 'uuid/v4';
 
 export default {
   Query: {
-    users: (parent, args, { models }) => {
-      return Object.values(models.users);
-    },
-    user: (parent, { id }, { models }) => {
-      return models.users[id];
-    },
-    me: (parent, args, { me }) => {
-      return me;
-    },
     message: (parent, { id }, { models }) => {
       return models.messages[id];
     },
     messages: (parent, args, { models }) => {
       return Object.values(models.messages);
-    },
-  },
-  User: {
-    messages: (user, args, { models }) => {
-      return Object.values(models.messages).filter(
-        (message) => message.userId === user.id,
-      );
-    },
-  },
-  Message: {
-    user: (message, args, { models }) => {
-      return models.users[message.userId];
     },
   },
   Mutation: {
@@ -54,6 +33,11 @@ export default {
       models.messages = otherMessages;
 
       return true;
+    },
+  },
+  Message: {
+    user: (message, args, { models }) => {
+      return models.users[message.userId];
     },
   },
 };
