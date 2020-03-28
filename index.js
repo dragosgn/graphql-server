@@ -1,7 +1,7 @@
 import express from 'express';
-import 'dotenv/config';
 import cors from 'cors';
 import { ApolloServer, gql } from 'apollo-server-express';
+import 'dotenv/config';
 
 const app = express();
 
@@ -9,7 +9,9 @@ app.use(cors());
 
 const schema = gql`
   type Query {
+    users: [User!]
     user(id: ID!): User
+    me: User
   }
   type User {
     id: ID!
@@ -17,12 +19,34 @@ const schema = gql`
   }
 `;
 
+let users = {
+  1: {
+    id: '1',
+    username: 'Dragos',
+  },
+  2: {
+    id: '2',
+    username: 'Tony',
+  },
+};
+
+const me = users[1];
+
 const resolvers = {
   Query: {
+    users: () => {
+      return Object.values(users);
+    },
+    user: (parent, { id }) => {
+      return users[id];
+    },
     me: () => {
-      return {
-        username: 'Dragos',
-      };
+      return me;
+    },
+  },
+  User: {
+    username: parent => {
+      return parent.username;
     },
   },
 };
