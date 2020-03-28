@@ -32,10 +32,12 @@ let messages = {
   1: {
     id: '1',
     text: 'Hello World',
+    userId: '1',
   },
   2: {
     id: '2',
     text: 'By World',
+    userId: '2',
   },
 };
 
@@ -49,8 +51,6 @@ let users = {
     username: 'Tony',
   },
 };
-
-const me = users[1];
 
 const resolvers = {
   Query: {
@@ -71,11 +71,11 @@ const resolvers = {
     },
   },
   User: {
-    username: user => `${user.firstname} ${user.lastname}`,
+    username: user => user.username,
   },
   Message: {
-    user: (parent, args, { me }) => {
-      return me;
+    user: message => {
+      return users[message.userId];
     },
   },
 };
