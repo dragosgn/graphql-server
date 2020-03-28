@@ -10,6 +10,7 @@ let users = {
     messageIds: [2],
   },
 };
+
 let messages = {
   1: {
     id: '1',
