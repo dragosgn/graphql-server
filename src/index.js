@@ -9,6 +9,8 @@ import models from './models';
 
 const app = express();
 
+const PORT = process.env.PORT || 8000;
+
 app.use(cors());
 
 const server = new ApolloServer({
@@ -22,6 +24,6 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, path: '/graphql' });
 
-app.listen({ port: process.env.PORT || 8000 }, () => {
-  console.log('Apollo Server on http://localhost:8000/graphql');
+app.listen(PORT, () => {
+  console.log(`Apollo Server on http://localhost:${PORT}/graphql`);
 });
